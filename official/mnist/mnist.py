@@ -90,7 +90,7 @@ def define_mnist_flags():
   flags_core.set_defaults(data_dir='/data',
                           model_dir='/output/training_logs',
                           batch_size=100,
-                          train_epochs=40)
+                          train_epochs=1)
 
 
 def model_fn(features, labels, mode, params):

@@ -27,7 +27,7 @@ from official.utils.logs import hooks_helper
 
 def define_base(data_dir=True, model_dir=True, clean=True, train_epochs=True,
                 epochs_between_evals=True, stop_threshold=True, batch_size=True,
-                num_gpu=True, hooks=True, export_dir=True):
+                num_gpu=True, hooks=True, export_dir=True, max_steps=True):
   """Register base flags.
 
   Args:
@@ -127,6 +127,12 @@ def define_base(data_dir=True, model_dir=True, clean=True, train_epochs=True,
                        "See the README for more details and relevant links.")
     )
     key_flags.append("export_dir")
+
+  if max_steps:
+    flags.DEFINE_integer(
+        name="max_steps", short_name="mx", default=1000,
+        help=help_wrap(
+            "The number of max steps of training."))
 
   return key_flags
 

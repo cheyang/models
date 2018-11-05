@@ -90,7 +90,8 @@ def define_mnist_flags():
   flags_core.set_defaults(data_dir='/data',
                           model_dir='/output/training_logs',
                           batch_size=100,
-                          train_epochs=1)
+                          train_epochs=1,
+                          max_steps=2000)
 
 
 def model_fn(features, labels, mode, params):
@@ -210,7 +211,7 @@ def run_mnist(flags_obj):
       batch_size=flags_obj.batch_size)
 
   # Train and evaluate model.
-  train_spec = tf.estimator.TrainSpec(input_fn=train_input_fn)
+  train_spec = tf.estimator.TrainSpec(input_fn=train_input_fn, max_steps=flags_obj.max_steps)
   eval_spec = tf.estimator.EvalSpec(input_fn=eval_input_fn)
   tf.estimator.train_and_evaluate(mnist_classifier, train_spec, eval_spec)
 

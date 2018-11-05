@@ -6,7 +6,7 @@ RUN mkdir -p /models /data/ && \
     curl -o /data/train-images-idx3-ubyte.gz https://raw.githubusercontent.com/cheyang/tensorflow-sample-code/master/data/train-images-idx3-ubyte.gz && \
     curl -o /data/train-labels-idx1-ubyte.gz https://raw.githubusercontent.com/cheyang/tensorflow-sample-code/master/data/train-labels-idx1-ubyte.gz && \
     cd /data && \
-    unzip *.gz
+    gunzip *.gz
 
 WORKDIR /models
 

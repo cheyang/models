@@ -1,10 +1,12 @@
 FROM tensorflow/tensorflow:1.9.0-devel
 
-RUN mkdir -p /models /data && \
+RUN mkdir -p /models /data/ /output/training_logs && \
     curl -o /data/t10k-images-idx3-ubyte.gz https://raw.githubusercontent.com/cheyang/tensorflow-sample-code/master/data/t10k-images-idx3-ubyte.gz && \
     curl -o /data/t10k-labels-idx1-ubyte.gz https://raw.githubusercontent.com/cheyang/tensorflow-sample-code/master/data/t10k-labels-idx1-ubyte.gz && \
     curl -o /data/train-images-idx3-ubyte.gz https://raw.githubusercontent.com/cheyang/tensorflow-sample-code/master/data/train-images-idx3-ubyte.gz && \
-    curl -o /data/train-labels-idx1-ubyte.gz https://raw.githubusercontent.com/cheyang/tensorflow-sample-code/master/data/train-labels-idx1-ubyte.gz
+    curl -o /data/train-labels-idx1-ubyte.gz https://raw.githubusercontent.com/cheyang/tensorflow-sample-code/master/data/train-labels-idx1-ubyte.gz && \
+    cd /data && \
+    unzip *.gz
 
 WORKDIR /models
 
@@ -13,3 +15,5 @@ COPY . .
 ENV PYTHONPATH=$PYTHONPATH:/models
 
 RUN pip install -r official/requirements.txt
+
+WORKDIR /models/official/mnist
